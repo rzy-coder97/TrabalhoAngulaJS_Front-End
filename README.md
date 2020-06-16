@@ -1,20 +1,3 @@
-<style>
-   body {
-      background: #fff;
-      color: rgba(0, 0, 0, 0.753);
-   }
-   h1 {
-      text-align: center;
-      font-size: 35px;
-   }
-   .angular {
-      color: #DD0031;
-   }
-   .bootstrap {
-      color: #7159c1;
-   }
-</style>
-
 <h1>
    Single Page Aplication com 
    <span class="angular">AngularJS</span> & <span class="bootstrap">Bootstap 4</span>
