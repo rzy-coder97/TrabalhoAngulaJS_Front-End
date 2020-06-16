@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="gymApp">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Victory Academia</title>
+		<link rel="icon" type="imagem/png" href="./src/icons/logo.svg" />
+
+		<link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./src/css/index.css" />
+	</head>
+
+	<body ng-controller="controlador as vm" ng-init="vm.init()">
+		<header class="container-fluid">
+			<!-- Barra de Navegação com Logo & Menu -->
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+				<div class="navbar-brand">
+					<span><img src="./src/icons/logo.svg"/>Academia</span>
+				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarToggle"
+					aria-controls="navBarToggle" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- Menu -->
+				<div class="collapse navbar-collapse justify-content-end" id="navBarToggle">
+					<div class="nav navbar-nav">
+						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+							aria-controls="nav-home" aria-selected="true">
+							Inicio
+						</a>
+						<a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab" href="#nav-student" role="tab"
+							aria-controls="nav-student" aria-selected="false">
+							Alunos
+						</a>
+						<button class="btn1 btn btn-success" data-toggle="modal" data-target="#cadastrarAluno">
+							Cadastrar novo aluno
+						</button>
+					</div>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Modal de Cadastro -->
+		<div class="modal fade" id="cadastrarAluno" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+			aria-labelledby="cadastrarAlunoLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="cadastrarAlunoLabel">
+							Informe os Dados do Aluno
+						</h5>
+					</div>
+
+					<!-- Formulario de Cadastro -->
+					<div class="modal-body">
+						<form class="form-row">
+							<div class="form-group col-md-6">
+								<label for="pNome">Nome</label>
+								<input ng-model="vm.aluno.nome" type="text" class="form-control" id="pNome" required placeholder="{{vm.aluno.nome}}"/>
+							</div>
+							<div class="form-group col-md-6 ">
+								<label for="sNome">Sobrenome</label>
+								<input ng-model="vm.aluno.sobrenome" type="text" class="form-control" id="sNome" required placeholder="{{vm.aluno.sobrenome}}"/>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="cpf">CPF</label>
+								<input ng-model="vm.aluno.cpf" type="text" class="form-control" id="cpf" required placeholder="{{vm.aluno.cpf}}"/>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="telefone">Telefone</label>
+								<input ng-model="vm.aluno.telefone" type="text" class="form-control" id="telefone" required placeholder="{{vm.aluno.telefone}}"/> 
+							</div>
+							<div class="form-group col-md-12">
+								<label for="endereco">Endereço</label>
+								<input ng-model="vm.aluno.endereco" type="text" class="form-control" id="endereco" required placeholder="{{vm.aluno.endereco}}"/>
+							</div>
+							
+						</form>
+					</div>
+
+					<div class="modal-footer">
+						<!-- Cancelar -->
+						<button ng-click="vm.clear()" type="reset" class="btn btn-danger" data-dismiss="modal">
+							Cancelar
+						</button>
+
+						<!-- Enviar -->
+						<button ng-click="vm.cadastrarAluno()" id="enviar" type="submit" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+							data-target=".activeModal">
+							Enviar
+						</button>
+						<button ng-click="vm.alterarCadastro($index)" id="atualizar" type="submit" class="btn btn-warning hidden" data-dismiss="modal" data-toggle="modal"
+							data-target=".activeModal">
+							Atualizar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Sucesso -->
+		<div class="modal fade" id="concluido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="sucesso modal-header">
+						<img src="./src/icons/sucesso.svg"/>
+					</div>
+					<div class="modal-body">
+						<h3>Aluno cadastrado com sucesso</h3>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">
+							Concluir
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal de  Error -->
+		<div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="error modal-header">
+						<img src="./src/icons/error.svg"/>
+					</div>
+
+					<div class="modal-body">
+						<h3>Não foi possivel concluir o cadastro</h3>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							Voltar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Local onde irá ser redenrizado os dados -->
+		<main class="container-fluid">
+			<section class="container tab-content" id="nav-tabContent">
+				<!-- Tela Inicial -->
+				<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+
+				</div>
+
+				<!-- Tabela de Alunos  -->
+				<div class="tab-pane fade" id="nav-student" role="tabpanel" aria-labelledby="nav-student-tab">
+
+					<table class="table table-hover table-dark">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Nome</th>
+								<th scope="col">CPF</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="aluno in vm.alunos track by $index" >
+								<th scope="row">{{$index + 1}}</th>
+								<td>{{aluno.nome}} {{aluno.sobrenome}}</td>
+								<td>{{aluno.cpf}}</td>
+								<td class="opcoes">
+									<div class="botoes">
+										<button ng-click="vm.carregarCadastro($index)" data-toggle="modal" data-target="#cadastrarAluno" class="editar btn btn-warning" >
+											<svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+												<path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/>
+												<path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/>
+											</svg>
+										</button>
+										<button ng-click=" vm.deletarCadastro($index)" class="deletar btn btn-danger">
+											<svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+												<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+												<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+											 </svg>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</section>
+			<div class="bottom">
+				<button class="btn btn-outline-success" data-toggle="modal" data-target="#cadastrarAluno">
+					<svg class="bi bi-plus" width="45px" height="45px" viewBox="0 0 16 16" fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+						<path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
+					</svg>
+				</button>
+			</div>
+		</main>
+
+		<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="./node_modules/angular/angular.min.js"></script>
+		<script src="./node_modules/angular-route/angular-route.min.js"></script>
+
+		<script def src="./app/app.js"></script>
+		<script def src="./app/controller.js"></script>
+
+	</body>
+
+</html>

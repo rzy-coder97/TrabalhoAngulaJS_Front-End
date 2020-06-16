@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+:root {
+	--color-1: #00d96dc0;
+}
+
+body {
+	background: url(../icons/fundo.jpg) no-repeat center center / cover;
+}
+h3,
+.nav-item {
+	text-align: center;
+}
+
+span {
+	font-family: "Permanent Marker", cursive;
+	color: var(--color-1);
+}
+
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .show > .nav-link {
+	color: var(--color-1);
+}
+
+img {
+	width: 50px;
+	height: 50px;
+}
+
+.btn-success,
+.btn-outline-success,
+::-webkit-scrollbar-thumb,
+thead {
+	background: var(--color-1);
+}
+.btn-success:hover,
+.btn-outline-success:hover {
+	background-color: transparent;
+	border: 1px solid var(--color-1);
+	color: var(--color-1);
+}
+
+.btn-outline-success {
+	color: #fff;
+}
+
+main {
+	background: linear-gradient(100deg, #333a40, #333a40 40%, transparent);
+	padding: 100px;
+	height: 100vh;
+	width: 100%;
+}
+
+section {
+	/* background-color: rgba(255, 255, 255, 0.288); */
+	height: 75vh;
+	overflow: auto;
+}
+
+.bottom {
+	position: fixed;
+	right: 12px;
+	bottom: 15px;
+}
+
+.btn-outline-success {
+	border-radius: 50%;
+	border: none;
+	display: none;
+	width: 70px;
+	height: 70px;
+}
+
+.sucesso,
+.error {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+.sucesso img,
+.error img {
+	width: 100px;
+	height: 100px;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+.opcoes {
+	display: grid;
+	justify-content: end;
+}
+
+
+.hidden {
+	display: none;
+}
+
+@media (max-width: 991px) {
+	.btn1 {
+		display: none;
+	}
+
+	.btn-outline-success {
+		display: block;
+	}
+}
+
+@media (max-width: 768px) {
+	.tabela {
+		width: 60%;
+		height: 60%;
+	}
+	.navbar-dark .navbar-nav .active > .nav-link,
+	.navbar-dark .navbar-nav .nav-link.active,
+	.navbar-dark .navbar-nav .nav-link.show,
+	.navbar-dark .navbar-nav .show > .nav-link {
+		border: 1px solid var(--color-1);
+		border-radius: 5px;
+	}
+}
+
+@media (max-width: 460px) {
+	.tabela {
+		width: 100%;
+		height: 100%;
+	}
+}
